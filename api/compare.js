@@ -48,7 +48,8 @@ async function queryMintlify(key, question) {
     });
 
     if (!resp.ok) {
-      return `[ERROR querying ${p.name}: HTTP ${resp.status}]`;
+      const body = await resp.text();
+      return `[ERROR querying ${p.name}: HTTP ${resp.status} — ${body.slice(0, 300)}]`;
     }
 
     const raw = await resp.text();
